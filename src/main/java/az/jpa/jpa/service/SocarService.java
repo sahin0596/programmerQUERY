@@ -1,6 +1,7 @@
 package az.jpa.jpa.service;
 
 import az.jpa.jpa.repository.SocarRepository;
+
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,19 +13,21 @@ import org.springframework.stereotype.Service;
 public class SocarService {
 
     private final SocarRepository socarRepository;
-
-
     @PostConstruct
-    public void ListByQueryMethods(){
-        socarRepository.findByFirstName("Sahin")
+    public void  jpql() {
+        socarRepository.findSocarsWithJPQL("Elgun", "Mammadov")
                 .stream()
                 .forEach(System.out::println);
-        socarRepository.findByFirstNameAndLastName("Elgun","Mammadov")
+    }
+    @PostConstruct
+    public void sql(){
+        socarRepository.findSocarsWithNativeSql("Babek","Merdimazardi")
                 .stream()
                 .forEach(System.out::println);
-        socarRepository.findByAge(96)
-                .stream()
-                .forEach(System.out::println);
+
+
+
+
 
     }
 
